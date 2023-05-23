@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/UWA.Service.Time.DataContracts" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/UWA.Service.Time.DataContracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://hrdtssiw01:8000/TimeService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://hrdtssiw01:8000/TimeService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/UWA.Service.Time.Business" />
+  <xs:complexType name="TimezoneDateTimeResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CorrelationID" type="ser:guid" />
+      <xs:element minOccurs="0" name="LocalDateTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="LocalDateTimeIsAmbiguous" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LocalDateTimeIsDaylightSavingTime" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LocalDateTimeIsInvalid" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LocalTimezoneNameCurrent" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LocalTimezoneNameDaylightSavingsTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LocalTimezoneNameDisplay" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LocalTimezoneNameStandard" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LocalTimezoneSupportsDaylightSavingTime" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LocalTimezoneUTCOffset" type="ser:duration" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/UWA.Service.Time.Business" minOccurs="0" name="Result" type="q1:TimezoneConversionResult" />
+      <xs:element minOccurs="0" name="ZuluDateTime" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TimezoneDateTimeResponse" nillable="true" type="tns:TimezoneDateTimeResponse" />
+  <xs:complexType name="SunriseSunsetResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CorrelationID" type="ser:guid" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/UWA.Service.Time.Business" minOccurs="0" name="Result" type="q2:SunriseSunsetResult" />
+      <xs:element minOccurs="0" name="ResultDetail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SunriseLocal" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SunriseZulu" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SunsetLocal" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="SunsetZulu" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Zenith" type="tns:ZenithTypes" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SunriseSunsetResponse" nillable="true" type="tns:SunriseSunsetResponse" />
+  <xs:simpleType name="ZenithTypes">
+    <xs:annotation>
+      <xs:appinfo>
+        <ActualType Name="long" Namespace="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Official">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">90833</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Civil">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">96000</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Nautical">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">102000</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Astronomical">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">108000</EnumerationValue>
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ZenithTypes" nillable="true" type="tns:ZenithTypes" />
+</xs:schema>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://schemas.univ-wea.com/simpletime" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.univ-wea.com/simpletime" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://schemas.univ-wea.com/simpletime/Imports">
+      <xsd:import schemaLocation="http://hrdtssiw01:8000/TimeService?xsd=xsd0" namespace="http://schemas.univ-wea.com/simpletime" />
+      <xsd:import schemaLocation="http://hrdtssiw01:8000/TimeService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://hrdtssiw01:8000/TimeService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/UWA.Service.Time.DataContracts" />
+      <xsd:import schemaLocation="http://hrdtssiw01:8000/TimeService?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/UWA.Service.Time.Business" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ISimpleTimeService_ZuluToLocal_InputMessage">
+    <wsdl:part name="parameters" element="tns:ZuluToLocal" />
+  </wsdl:message>
+  <wsdl:message name="ISimpleTimeService_ZuluToLocal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ZuluToLocalResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISimpleTimeService_LocalToZulu_InputMessage">
+    <wsdl:part name="parameters" element="tns:LocalToZulu" />
+  </wsdl:message>
+  <wsdl:message name="ISimpleTimeService_LocalToZulu_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LocalToZuluResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISimpleTimeService_GetSunriseSunsetICAO_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetSunriseSunsetICAO" />
+  </wsdl:message>
+  <wsdl:message name="ISimpleTimeService_GetSunriseSunsetICAO_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetSunriseSunsetICAOResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ISimpleTimeService">
+    <wsdl:operation name="ZuluToLocal">
+      <wsdl:input wsaw:Action="http://schemas.univ-wea.com/simpletime/ISimpleTimeService/ZuluToLocal" message="tns:ISimpleTimeService_ZuluToLocal_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.univ-wea.com/simpletime/ISimpleTimeService/ZuluToLocalResponse" message="tns:ISimpleTimeService_ZuluToLocal_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LocalToZulu">
+      <wsdl:input wsaw:Action="http://schemas.univ-wea.com/simpletime/ISimpleTimeService/LocalToZulu" message="tns:ISimpleTimeService_LocalToZulu_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.univ-wea.com/simpletime/ISimpleTimeService/LocalToZuluResponse" message="tns:ISimpleTimeService_LocalToZulu_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSunriseSunsetICAO">
+      <wsdl:input wsaw:Action="http://schemas.univ-wea.com/simpletime/ISimpleTimeService/GetSunriseSunsetICAO" message="tns:ISimpleTimeService_GetSunriseSunsetICAO_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.univ-wea.com/simpletime/ISimpleTimeService/GetSunriseSunsetICAOResponse" message="tns:ISimpleTimeService_GetSunriseSunsetICAO_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,70 @@
+@using System.Web.Http
+@using API.Areas.HelpPage.Models
+@using API.Infrastructure.Extensions
+@model HelpPageApiModel
+
+@{ 
+    var description = Model.ApiDescription;
+    bool hasParameters = description.ParameterDescriptions.Count > 0;
+    bool hasRequestSamples = Model.SampleRequests.Count > 0;
+    bool hasResponseSamples = Model.SampleResponses.Count > 0;
+}
+@Html.ActionLink("back", "index", null, new { @class = "back" })
+<h2>@description.GetDefaultUri(false)</h2>
+<div>
+    @if (description.Documentation != null)
+    {
+        <h4>Description</h4>
+        <p>@description.Documentation</p>
+    }
+    else
+    {
+        <p>No documentation available.</p>
+    }
+
+    <h4>URI</h4>
+    <p>
+        <span class="inline-heading">Standard:</span> @description.GetDefaultUri()
+    </p>
+    @if (description.HasAttributeRoute())
+    {
+        <p>
+            <span class="inline-heading">Alternative:</span> @description.GetAttributeRoute()
+        </p>
+    }
+    <h4>Supported HTTP Methods</h4>
+    <p>
+        @description.HttpMethod.Method
+    </p>
+
+    @if (hasParameters || hasRequestSamples)
+    {
+        if (hasParameters)
+        {
+        <h4>Request Parameters</h4>
+        @Html.DisplayFor(apiModel => apiModel.ApiDescription.ParameterDescriptions, "Parameters")
+        }
+        if (hasRequestSamples)
+        {
+        <h4>Request body formats</h4>
+        @Html.DisplayFor(apiModel => apiModel.SampleRequests, "Samples")
+        }
+    }
+
+    @if (hasResponseSamples)
+    {
+        if (description.ResponseDescription.Documentation != null)
+        {
+        <p>@description.ResponseDescription.Documentation</p>
+        }
+        else
+        {
+        <p>No documentation available.</p>
+        }
+        <h4>Supported Response body formats</h4>
+        <p>
+            @Model.GetSupportedMediaTypesString()
+        </p>
+        @Html.DisplayFor(apiModel => apiModel.SampleResponses, "Samples")
+    }
+</div>

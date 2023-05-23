@@ -1,0 +1,1007 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API</name>
+    </assembly>
+    <members>
+        <member name="M:API.WebApiConfig.Register(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Setup the api, configure routes, ioc, query support and formatters.
+            </summary>
+            <param name="config"><see cref="T:System.Web.Http.HttpConfiguration"/></param>
+        </member>
+        <member name="T:API.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="T:API.Controllers.BlogController">
+            <summary>
+            This controller exposes endpoints to access the blogs in the database
+            </summary>
+        </member>
+        <member name="M:API.Controllers.BlogController.#ctor(API.Domain.Services.IBlogService)">
+            <summary>
+            Set the blog service
+            </summary>
+            <param name="service">The blog interface</param>
+        </member>
+        <member name="M:API.Controllers.BlogController.Get(System.Guid)">
+            <summary>
+            This gets the Blog associated with the Guid parameters
+            </summary>
+            <param name="id">The guid representing the Blog</param>
+            <returns>A blog to retrieve</returns>
+        </member>
+        <member name="M:API.Controllers.BlogController.GetAll">
+            <summary>
+            This gets all the Blogs in a list. This call supports OData conventions.
+            </summary>
+            <returns>A list of blogs</returns>
+        </member>
+        <member name="M:API.Controllers.BlogController.Save(API.Domain.Blog.Blog)">
+            <summary>
+            This saves a Blog into the database. The content-type request body supports json and xml.
+            </summary>
+            <param name="blog">The blog to save</param>
+        </member>
+        <member name="M:API.Controllers.BlogController.Delete(System.Guid)">
+            <summary>
+            This deletes a Blog by its existing Guid  
+            </summary>
+            <param name="id">The guid of the blog</param>
+        </member>
+        <member name="M:API.Controllers.BlogController.Update(API.Domain.Blog.Blog)">
+            <summary>
+            This updates a blog from a complete Blog object. The content-type request body supports json and xml.
+            </summary>
+            <param name="blog">The blog to update</param>
+        </member>
+        <member name="T:API.Infrastructure.Attributes.RequireKeyAttribute">
+            <summary>
+            Checks for a api key present in the 
+            </summary>
+        </member>
+        <member name="M:API.Infrastructure.Attributes.RequireKeyAttribute.OnActionExecuting(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Checks the request has a valid API key
+            </summary>
+            <param name="actionContext"><see cref="T:System.Web.Http.Controllers.HttpActionContext"/></param>
+        </member>
+        <member name="M:API.Infrastructure.Attributes.RequireKeyAttribute.ExtractApiKey(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Trys to get a api key from the querystring
+            </summary>
+            <param name="request"><see cref="T:System.Net.Http.HttpRequestMessage"/></param>
+            <returns>string api key</returns>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.HttpControllerContextExtensions.IsSecured(System.Web.Http.Controllers.HttpControllerContext)">
+            <summary>
+            Checks if the controller is secured, ie if the <see cref="T:API.Infrastructure.Attributes.RequireSignatureAttribute"/>
+            is present on the controller.
+            </summary>
+            <param name="context"><see cref="T:System.Web.Http.Controllers.HttpControllerContext"/></param>
+            <returns>bool Secured or not</returns>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action. 
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,API.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:API.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:API.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:API.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.Models.HelpPageApiModel.GetSupportedMediaTypesString">
+            <summary>
+            Gets a string of supported media types
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:API.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:API.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+            
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,API.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,API.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:API.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create one using <see cref="T:API.Areas.HelpPage.ObjectGenerator"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},API.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.AddRuntimeFormatters(System.Web.Http.Description.ApiDescription,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter})">
+            <summary>
+            Adds the formatters that are added on the fly
+            </summary>
+            <param name="api"><see cref="T:System.Web.Http.Description.ApiDescription"/></param>
+            <param name="formatters">List of formatters</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:API.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleKey.#ctor(API.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:API.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:API.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,API.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:API.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:API.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:API.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:API.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:API.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:API.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:API.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:API.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="T:API.Controllers.ErrorController">
+            <summary>
+            Controller to return 404 responses
+            </summary>
+        </member>
+        <member name="M:API.Controllers.ErrorController.Handle404">
+            <summary>
+            Send a not found response to the client
+            </summary>
+            <returns><see cref="T:System.Net.Http.HttpResponseMessage"/></returns>
+        </member>
+        <member name="T:API.Infrastructure.Attributes.HideFromDocumentation">
+            <summary>
+            Attribute to mark classes to support documentation or not
+            </summary>
+        </member>
+        <member name="T:API.Infrastructure.Attributes.SupportKMLAttribute">
+            <summary>
+            Attribute to add KML support on the fly.
+            </summary>
+        </member>
+        <member name="M:API.Infrastructure.Attributes.SupportKMLAttribute.OnActionExecuting(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Add the KML formatter on the fly
+            </summary>
+            <param name="actionContext">Current request context</param>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.ApiControllerExtensions.RecordNotFound(System.Web.Http.ApiController,System.String)">
+            <summary>
+            Generate a friendly message to the client when we cant find records
+            </summary>
+            <param name="controller"><see cref="T:System.Web.Http.ApiController"/></param>
+            <param name="message">Optional message to send to client</param>
+            <returns><see cref="T:API.Infrastructure.Results.RecordNotFoundResult"/></returns>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.ApiDescriptionExtensions.GetDefaultUri(System.Web.Http.Description.ApiDescription,System.Boolean)">
+            <summary>
+            Creates a default Uri string with parameters added via the querystring
+            </summary>
+            <param name="description"><see cref="T:System.Web.Http.Description.ApiDescription"/></param>
+            <param name="includeQuerystring">Whether to include the querystring in the response</param>
+            <returns>Uri String</returns>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.ApiDescriptionExtensions.HasAttributeRoute(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Checks whether the action has a attribute route or not. Compares the relative root
+            against the default URI we build.
+            </summary>
+            <param name="description"><see cref="T:System.Web.Http.Description.ApiDescription"/></param>
+            <returns>Has attribtue route or not </returns>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.ApiDescriptionExtensions.GetAttributeRoute(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the route attribute uri. Often a friendly url to request and only
+            includes the required parameters
+            </summary>
+            <param name="description"><see cref="T:System.Web.Http.Description.ApiDescription"/></param>
+            <returns>string</returns>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.ApiDescriptionExtensions.BuildDefaultUri(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Builds a URI from the default route and action/controller descriptors.
+            </summary>
+            <param name="description"><see cref="T:System.Web.Http.Description.ApiDescription"/></param>
+            <returns>URI String</returns>
+        </member>
+        <member name="T:API.Infrastructure.Attributes.ExceptionHandler">
+            <summary>
+            Globally handle exceptions
+            </summary>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.ApiParameterDescriptionExtensions.GetFriendlyParameterType(System.Web.Http.Description.ApiParameterDescription)">
+            <summary>
+            Gets a friendly representation for the parameter type
+            </summary>
+            <param name="parameter"><see cref="T:System.Web.Http.Description.ApiParameterDescription"/></param>
+            <returns>string</returns>
+        </member>
+        <member name="M:API.Infrastructure.Extensions.HttpActionContextExtensions.IsSecured(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Checks if the current action is secured, ie has a <see cref="T:API.Infrastructure.Attributes.RequireSignatureAttribute"/>
+            attribute added.
+            </summary>
+            <param name="context"><see cref="T:System.Web.Http.Controllers.HttpActionContext"/></param>
+            <returns>bool secured or not</returns>
+        </member>
+        <member name="T:API.Infrastructure.Formatters.JsonpFormatter">
+            <summary>
+            Support JSONP response formats
+            </summary>
+        </member>
+        <member name="M:API.Infrastructure.Formatters.JsonpFormatter.#ctor(System.Net.Http.Formatting.MediaTypeFormatter,System.String)">
+            <summary>
+            Initialize a new instance of the <see cref="T:API.Infrastructure.Formatters.JsonpFormatter"/> class
+            </summary>
+            <param name="jsonMediaTypeFormatter">Standard json media formatter</param>
+            <param name="callbackParameterName">Callback parameter name</param>
+        </member>
+        <member name="M:API.Infrastructure.Formatters.JsonpFormatter.#ctor(System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.HttpRequestMessage,System.String,System.String)">
+            <summary>
+            Initialize a new instance of the <see cref="T:API.Infrastructure.Formatters.JsonpFormatter"/> class
+            </summary>
+            <param name="jsonMediaTypeFormatter">Standard </param>
+            <param name="request"></param>
+            <param name="callbackParameterName"></param>
+            <param name="callbackParameterValue"></param>
+        </member>
+        <member name="M:API.Infrastructure.Formatters.JsonpFormatter.GetPerRequestFormatterInstance(System.Type,System.Net.Http.HttpRequestMessage,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Gets the request formatter instance, either returns the default JsonMediaTypeFormatter
+            if the request is asking for jsonp or returns this class for jsonp requests.
+            </summary>
+            <param name="type">Type of object to serialize</param>
+            <param name="request">Current HttpRequestMessage</param>
+            <param name="mediaType">Media type</param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Infrastructure.Formatters.JsonpFormatter.WriteToStreamAsync(System.Type,System.Object,System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext)">
+            <summary>
+            Serialize and write the object to the stream.
+            </summary>
+            <param name="type">Type of object</param>
+            <param name="value">Object value</param>
+            <param name="writeStream">Output stream</param>
+            <param name="content">Http content (headers etc)</param>
+            <param name="transportContext">Transport context</param>
+            <returns></returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:API.Infrastructure.Formatters.JsonpFormatter.CanReadType(System.Type)" -->
+        <member name="M:API.Infrastructure.Formatters.JsonpFormatter.CanWriteType(System.Type)">
+            <summary>
+            Can we write the type to json
+            </summary>
+            <param name="type">Type of object to write</param>
+            <returns>bool can or cant write the object</returns>
+        </member>
+        <member name="M:API.Infrastructure.Formatters.JsonpFormatter.IsJsonpRequest(System.Net.Http.HttpRequestMessage,System.String,System.String@)">
+            <summary>
+            Checks if the current HttpRequestMessage is asking for jsonp
+            or regular json
+            </summary>
+            <param name="request">Current request</param>
+            <param name="callbackParameterName">Callback parameter name</param>
+            <param name="callbackParameterValue">Callback parameter value</param>
+            <returns></returns>
+        </member>
+        <member name="T:API.Infrastructure.Formatters.KMLFormatter">
+            <summary>
+            Formatter to provide KML files
+            </summary>
+        </member>
+        <member name="M:API.Infrastructure.Formatters.KMLFormatter.#ctor">
+            <summary>
+            Initialize a new instance of the <see cref="T:API.Infrastructure.Formatters.KMLFormatter"/> class and 
+            set the media type and add a querystring mapping.
+            </summary>
+        </member>
+        <member name="M:API.Infrastructure.Formatters.KMLFormatter.CanReadType(System.Type)">
+            <summary>
+            We aren't reading any incoming KML currently.
+            </summary>
+            <param name="type">KML Object</param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Infrastructure.Formatters.KMLFormatter.CanWriteType(System.Type)">
+            <summary>
+            Check if the type is a valid KML object
+            </summary>
+            <param name="type">Type of object to write</param>
+            <returns>bool can write type</returns>
+        </member>
+        <member name="M:API.Infrastructure.Formatters.KMLFormatter.WriteToStreamAsync(System.Type,System.Object,System.IO.Stream,System.Net.Http.HttpContent,System.Net.TransportContext)">
+            <summary>
+            Write the value out as KML to the stream.
+            </summary>
+            <param name="type">Type</param>
+            <param name="value">Value to write</param>
+            <param name="writeStream">Stream to write to</param>
+            <param name="content">Http content</param>
+            <param name="transportContext">Transport channel binding info</param>
+            <returns>Task</returns>
+        </member>
+        <member name="M:API.Infrastructure.Handlers.AuditHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            Log requests and response
+            </summary>
+            <param name="request">Current request</param>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Infrastructure.Handlers.AuditHandler.Log(System.Net.Http.HttpRequestMessage,System.Net.Http.HttpResponseMessage,System.Int64,System.Exception)">
+            <summary>
+            Logs a request/response to the database.
+            </summary>
+            <param name="request">Current request</param>
+            <param name="response">Response to send</param>
+            <param name="responseTime">Time taken to send the response (milliseconds)</param>
+            <param name="exception">Optional exception</param>
+        </member>
+        <member name="M:API.Infrastructure.Handlers.AuditHandler.GetApiKey(System.Uri)">
+            <summary>
+            Gets the api key from query string
+            </summary>
+            <param name="uri"><see cref="T:System.Uri"/></param>
+            <returns>string</returns>
+        </member>
+        <member name="M:API.Infrastructure.Handlers.AuditHandler.GetBytesSent(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Calculates the kilobytes sent with the response
+            </summary>
+            <param name="response"><see cref="T:System.Net.Http.HttpResponseMessage"/></param>
+            <returns>Kilobytes</returns>
+        </member>
+        <member name="M:API.Infrastructure.Handlers.AuditHandler.GetBytesReceived(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Calculates the kilobytes received in the request
+            </summary>
+            <param name="request"><see cref="T:System.Net.Http.HttpRequestMessage"/></param>
+            <returns>Kilobytes</returns>
+        </member>
+        <member name="T:API.Infrastructure.HttpRequestMessageExtensions">
+            <summary>
+            Request message extensions
+            </summary>
+        </member>
+        <member name="M:API.Infrastructure.HttpRequestMessageExtensions.IsKMLRequest(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Checks if the request is a KML request. Checks the accept header
+            and then looks for a fmt parameter with a kml value
+            </summary>
+            <param name="request">Current request</param>
+            <returns>bool kml request or not</returns>
+        </member>
+        <member name="T:API.Infrastructure.Attributes.RequireSignatureAttribute">
+            <summary>
+            Validate signatures on endpoints that need security
+            </summary>
+        </member>
+        <member name="M:API.Infrastructure.Attributes.RequireSignatureAttribute.OnActionExecuting(System.Web.Http.Controllers.HttpActionContext)">
+            <summary>
+            Check if the request has a valid signature before responding.
+            </summary>
+            <param name="actionContext"><see cref="T:System.Web.Http.Controllers.HttpActionContext"/></param>
+        </member>
+        <member name="M:API.Infrastructure.Attributes.RequireSignatureAttribute.IsAuthenticated(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Checks if the request contains a valid request signature
+            </summary>
+            <param name="request"><see cref="T:System.Net.Http.HttpRequestMessage"/></param>
+            <returns>bool Authenticated</returns>
+        </member>
+        <member name="M:API.Infrastructure.Attributes.RequireSignatureAttribute.ValidTimestamp(System.DateTime)">
+            <summary>
+            Checks that the request time is a maximum 2mins greater or lesser 
+            than the current coordinated universal time.
+            </summary>
+            <param name="timestamp"><see cref="T:System.DateTime"/></param>
+            <returns>bool valid request timestamp</returns>
+        </member>
+        <member name="M:API.Infrastructure.Attributes.RequireSignatureAttribute.CreateStringToSign(System.Net.Http.HttpRequestMessage,System.DateTime)">
+            <summary>
+            Creates the string to sign in teh correct format, consisting of:
+            {Http Method}\n
+            {Uri}\n
+            {Parameter-String}\n
+            {Api-key}
+            {timestamp Format RFC 1123}
+            </summary>
+            <param name="request"><see cref="T:System.Net.Http.HttpRequestMessage"/></param>
+            <param name="requestDate">UTC Request time</param>
+            <returns>String to sign</returns>
+        </member>
+        <member name="M:API.Infrastructure.Attributes.RequireSignatureAttribute.BuildOrderedParameterString(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Orders the parameter string
+            </summary>
+            <param name="request"><see cref="T:System.Net.Http.HttpRequestMessage"/></param>
+            <returns>Ordered parameter string</returns>
+        </member>
+        <member name="M:API.Infrastructure.Attributes.RequireSignatureAttribute.DuplicateRequest(System.String)">
+            <summary>
+            If the memory cache contains the signature then this is a second request
+            and is invalid.
+            </summary>
+            <param name="signature">Request signature</param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Infrastructure.Attributes.RequireSignatureAttribute.AddToCache(System.String)">
+            <summary>
+            Adds the signature to the memory cache.
+            </summary>
+            <param name="signature">Request signature</param>
+        </member>
+        <member name="M:API.Infrastructure.Attributes.RequireSignatureAttribute.ExtractSignature(System.Net.Http.Headers.HttpHeaders,System.Uri)">
+            <summary>
+            Gets the signature value from the request
+            </summary>
+            <param name="requestUri"><see cref="T:System.Uri"/></param>
+            <param name="headers">Request <see cref="T:System.Net.Http.Headers.HttpHeaders"/></param>
+            <returns>Request string signature</returns>
+        </member>
+        <member name="M:API.Infrastructure.Attributes.RequireSignatureAttribute.GetHttpHeader(System.Net.Http.Headers.HttpHeaders,System.String)">
+            <summary>
+            Helper method to retrieve a http header by its name
+            </summary>
+            <param name="headers">Request <see cref="T:System.Net.Http.Headers.HttpHeaders"/></param>
+            <param name="name">Header name</param>
+            <returns>Header string</returns>
+        </member>
+        <member name="M:API.Infrastructure.Ioc.IocUtilities.SetupContainer">
+            <summary>
+            Build the simple injector container and register all the services.
+            </summary>
+            <returns><see cref="T:SimpleInjector.Container"/></returns>
+        </member>
+        <member name="M:API.Infrastructure.Ioc.SimpleInjectorExtensions.RegisterApiControllers(SimpleInjector.Container)">
+            <summary>
+            Registers all Web API controllers with the simple injector container
+            </summary>
+            <param name="container"><see cref="T:SimpleInjector.Container"/></param>
+        </member>
+        <member name="M:API.Infrastructure.Ioc.SimpleInjectorWebApiScope.#ctor(SimpleInjector.Container)">
+            <summary>
+            Initialize <see cref="!:SimpleInjectorWebApiScore"/>
+            </summary>
+            <param name="container">Container to create</param>
+        </member>
+        <member name="M:API.Infrastructure.Ioc.SimpleInjectorWebApiScope.GetService(System.Type)">
+            <summary>
+            Resolve a single object of a given type
+            </summary>
+            <param name="serviceType">Type to resolve</param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Infrastructure.Ioc.SimpleInjectorWebApiScope.GetServices(System.Type)">
+            <summary>
+            Resolves a collection of objects of a given type
+            </summary>
+            <param name="serviceType">Type to resolve</param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Infrastructure.Ioc.SimpleInjectorWebApiScope.Dispose">
+            <summary>
+            Dont need to implement as the simpleinjecterresolver returns
+            'this' for begin scope
+            </summary>
+        </member>
+        <member name="M:API.Infrastructure.Ioc.SimpleInjectorWebApiResolver.#ctor(SimpleInjector.Container)">
+            <summary>
+            Get the container from the Scope
+            </summary>
+            <param name="container"><see cref="T:SimpleInjector.Container"/></param>
+        </member>
+        <member name="T:API.Infrastructure.KMLHelper">
+            <summary>
+            Creates KML objects from a variety of input sources
+            </summary>
+        </member>
+        <member name="M:API.Infrastructure.KMLHelper.CreateData(System.String,System.String)">
+            <summary>
+            Creates data for the extendeddata node
+            </summary>
+            <param name="dataName">Name of data node</param>
+            <param name="value">Value of data</param>
+            <returns><see cref="T:SharpKml.Dom.Data"/></returns>
+        </member>
+        <member name="M:API.Infrastructure.KMLHelper.CreateStyle(System.String)">
+            <summary>
+            Creates a style object for a placemark
+            </summary>
+            <param name="icao"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Infrastructure.KMLHelper.CreatePoint(System.String,System.String)">
+            <summary>
+            Creates a point object and sets the coordinates
+            </summary>
+            <param name="lat">Latitude</param>
+            <param name="lon">Longitude</param>
+            <returns><see cref="T:SharpKml.Dom.Point"/></returns>
+        </member>
+        <member name="T:API.Infrastructure.Results.RecordNotFoundResult">
+            <summary>
+            Used when we cant find a record
+            </summary>
+        </member>
+        <member name="M:API.Infrastructure.Results.RecordNotFoundResult.ExecuteAsync(System.Threading.CancellationToken)">
+            <summary>
+            Send the response
+            </summary>
+            <param name="cancellationToken">Cancellation token</param>
+            <returns>HttpResponseMessage</returns>
+        </member>
+        <member name="T:API.Infrastructure.Selectors.HttpNotFoundAwareActionSelector">
+            <summary>
+            Handle 404 request to invalid actions.
+            </summary>
+        </member>
+        <member name="M:API.Infrastructure.Selectors.HttpNotFoundAwareActionSelector.#ctor">
+            <summary>
+            Initialize the <see cref="T:API.Infrastructure.Selectors.HttpNotFoundAwareActionSelector"/> class
+            </summary>
+        </member>
+        <member name="M:API.Infrastructure.Selectors.HttpNotFoundAwareActionSelector.SelectAction(System.Web.Http.Controllers.HttpControllerContext)">
+            <summary>
+            Catch requests to invalid actions and re-route to the error controller
+            </summary>
+            <param name="controllerContext">Controller Context</param>
+            <returns>HttpActionDescriptor</returns>
+        </member>
+        <member name="T:API.Infrastructure.Selectors.HttpNotFoundAwareControllerSelector">
+            <summary>
+            Handle 404 request to invalid controllers
+            </summary>
+        </member>
+        <member name="M:API.Infrastructure.Selectors.HttpNotFoundAwareControllerSelector.#ctor(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Initialize the <see cref="T:API.Infrastructure.Selectors.HttpNotFoundAwareControllerSelector"/> class
+            </summary>
+            <param name="config"><see cref="!:HttpConfiguraton"/></param>
+        </member>
+        <member name="M:API.Infrastructure.Selectors.HttpNotFoundAwareControllerSelector.SelectController(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Perform the standard controller selecting but, catch not found requests
+            and reroute to the error controller 404 action
+            </summary>
+            <param name="request">Current Request</param>
+            <returns></returns>
+        </member>
+        <member name="T:API.RequestModels.AnswerRequestModel">
+            <summary>
+            Answer Request Model
+            </summary>
+        </member>
+        <member name="P:API.RequestModels.AnswerRequestModel.questionid">
+            <summary>
+            Question IDs
+            </summary>
+        </member>
+        <member name="P:API.RequestModels.AnswerRequestModel.answer">
+            <summary>
+            Answers
+            </summary>
+        </member>
+        <member name="P:API.RequestModels.AnswerRequestModel.surveyId">
+            <summary>
+            SurveyId
+            </summary>
+        </member>
+        <member name="P:API.RequestModels.AnswerRequestModel.fromEmail">
+            <summary>
+            From Email Address
+            </summary>
+        </member>
+        <member name="P:API.RequestModels.AnswerRequestModel.replyToEmail">
+            <summary>
+            ReplyTo Email Address
+            </summary>
+        </member>
+        <member name="P:API.RequestModels.AnswerRequestModel.emailid">
+            <summary>
+            EmailId
+            </summary>
+        </member>
+        <member name="P:API.RequestModels.AnswerRequestModel.referrer">
+            <summary>
+            Referrer
+            </summary>
+        </member>
+        <member name="P:API.RequestModels.AnswerRequestModel.contactrequestreceiver">
+            <summary>
+            CC
+            </summary>
+        </member>
+        <member name="P:API.RequestModels.AnswerRequestModel.bcccontactrequestreceiver">
+            <summary>
+            BCC
+            </summary>
+        </member>
+        <member name="T:API.RequestModels.EmailRequestModel">
+            <summary>
+            Email Request Model
+            </summary>
+        </member>
+        <member name="P:API.RequestModels.EmailRequestModel.fromEmail">
+            <summary>
+            From Email Address
+            </summary>
+        </member>
+        <member name="P:API.RequestModels.EmailRequestModel.replyToEmail">
+            <summary>
+            ReplyTo Email Address
+            </summary>
+        </member>
+        <member name="P:API.RequestModels.EmailRequestModel.endUserEmailId">
+            <summary>
+            End User Email Address
+            </summary>
+        </member>
+        <member name="P:API.RequestModels.EmailRequestModel.ccEmailAddresses">
+            <summary>
+            CC
+            </summary>
+        </member>
+        <member name="P:API.RequestModels.EmailRequestModel.bccEmailAddresses">
+            <summary>
+            BCC
+            </summary>
+        </member>
+        <member name="P:API.RequestModels.EmailRequestModel.emailBody">
+            <summary>
+            Email Body
+            </summary>
+        </member>
+        <member name="P:API.RequestModels.EmailRequestModel.isCustomer">
+            <summary>
+            Is Customer
+            </summary>
+        </member>
+    </members>
+</doc>

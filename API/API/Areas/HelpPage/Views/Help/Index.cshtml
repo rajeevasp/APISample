@@ -1,0 +1,35 @@
+@using System.Web.Http
+@using System.Web.Http.Controllers
+@using System.Web.Http.Description
+@using System.Collections.ObjectModel
+@using API.Areas.HelpPage.Models
+@model IEnumerable<ApiDescription>
+
+@{
+    ViewBag.Title = "API Sample";
+
+    // Group APIs by controller
+    ILookup<HttpControllerDescriptor, ApiDescription> apiGroups = Model.ToLookup(api => api.ActionDescriptor.ControllerDescriptor);
+    var controllers = Model.Select(api => api.ActionDescriptor.ControllerDescriptor.ControllerName).Distinct();
+}
+
+<div id="body">
+    <section class="content-wrapper main-content clear-fix">
+        <div id="contents">
+            <h2>API's</h2>
+            <ul>
+            @foreach (var controller in controllers)
+            {
+                <li>
+                    <a href="#@controller">@controller</a>
+                </li>
+            }
+            </ul>
+        </div>
+
+        @foreach (var group in apiGroups)
+        {
+            @Html.DisplayFor(m => group, "ApiGroup")
+        }
+    </section>
+</div>

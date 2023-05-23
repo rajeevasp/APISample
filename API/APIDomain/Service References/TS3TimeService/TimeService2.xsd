@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.univ-wea.com/simpletime" elementFormDefault="qualified" targetNamespace="http://schemas.univ-wea.com/simpletime" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://hrdtssiw01:8000/TimeService?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="http://hrdtssiw01:8000/TimeService?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/UWA.Service.Time.DataContracts" />
+  <xs:element name="ZuluToLocal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="datetime" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="icao" nillable="true" type="xs:string" />
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="correlationID" type="q1:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ZuluToLocalResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/UWA.Service.Time.DataContracts" minOccurs="0" name="ZuluToLocalResult" nillable="true" type="q2:TimezoneDateTimeResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LocalToZulu">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="datetime" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="icao" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="correlationID" type="q3:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LocalToZuluResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/UWA.Service.Time.DataContracts" minOccurs="0" name="LocalToZuluResult" nillable="true" type="q4:TimezoneDateTimeResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSunriseSunsetICAO">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="datetime" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="icao" nillable="true" type="xs:string" />
+        <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/" minOccurs="0" name="correlationID" type="q5:guid" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetSunriseSunsetICAOResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/UWA.Service.Time.DataContracts" minOccurs="0" name="GetSunriseSunsetICAOResult" nillable="true" type="q6:SunriseSunsetResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

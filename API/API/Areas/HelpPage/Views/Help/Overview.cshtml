@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "API Information";
+}
+<div id="body">
+    <section class="content-wrapper main-content clear-fix">
+        @Html.ActionLink("back", "index", null, new { @class = "back" })
+        <h2>Content Negotiation</h2>
+        <p>
+            There are several ways to request content types from the API endpoints:
+        </p>
+        <ul>
+            <li>Set the <i>Accepts</i> header on the HTTP request to the media type required.</li>
+            <li>Append a fmt parameter to the querystring and set the value (json, jsonp, xml, kml)</li>
+        </ul>
+        <p>
+            Check the individual endpoints to see what response formats are supported. If no Accept or fmt parameter
+            is supplied, then the default response is <i>json</i>.
+        </p>
+
+        <h2>Cross Domain Requests</h2>
+        <p>
+            The endpoints all support jsonp GET requests. In order to retrieve JSONP responses append tot he querystring 
+            the <i>fmt</i> parameter with a value of <i>json</i>, and add a <i>callback</i> parameter with the value you want the 
+            response to be wrapped in. Alternatively you can change the <i>fmt</i> parameter value to <i>jsonp</i>, and a the response
+            will be wrapped in a random callback. The <i>callback</i> parameter takes preference over the fmt json and jsonp.
+        </p>
+
+        <h2>Request Methods</h2>
+        <p>
+            Supported HTTP methods
+        </p>
+        <ul>
+            <li>GET</li>
+            <li>POST</li>
+        </ul>
+
+        <h2>HTTP Response Statuses</h2>
+        <p>
+            Response codes the Univer Weather Aiport API returns.
+        </p>
+        <ul>
+            <li>200: Successful request</li>
+            <li>201: Success resource created</li>
+            <li>204: Success no content</li>
+            <li>400: Bad request, client error</li>
+            <li>401: Unauthorized</li>
+            <li>404: Resource not found</li>
+            <li>405: HTTP Method not supported</li>
+            <li>415: Media type not supported</li>
+            <li>500: Internal server error</li>
+            <li>503: Resource unavailable</li>
+        </ul>
+        <p>
+            201 status code response will be sent back after a valid HTTP Post request which creates a resource.
+            204 status code responses will be returned when a resource has been deleted.
+        </p>
+    </section>
+</div>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="bffb345c-094c-4771-bffd-2a25c389c280" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://hrdtssiw01:8000/TimeService" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="TimeService.xsd" MetadataType="Schema" ID="18ed4146-4c2a-43f4-a840-72762b799741" SourceId="1" SourceUrl="http://hrdtssiw01:8000/TimeService?xsd=xsd2" />
+    <MetadataFile FileName="TimeService.disco" MetadataType="Disco" ID="94c34408-2deb-400c-9b0a-f0e2c09d4c5a" SourceId="1" SourceUrl="http://hrdtssiw01:8000/TimeService?disco" />
+    <MetadataFile FileName="TimeService1.xsd" MetadataType="Schema" ID="7dfa43b5-5504-493b-87b4-1e9152031bc8" SourceId="1" SourceUrl="http://hrdtssiw01:8000/TimeService?xsd=xsd1" />
+    <MetadataFile FileName="TimeService.wsdl" MetadataType="Wsdl" ID="5e51594c-c9c6-45e4-a838-3d9aafe1ef71" SourceId="1" SourceUrl="http://hrdtssiw01:8000/TimeService?wsdl=wsdl0" />
+    <MetadataFile FileName="TimeService2.xsd" MetadataType="Schema" ID="2faca9f6-f95a-407c-a5bd-cc26d5fdfcd6" SourceId="1" SourceUrl="http://hrdtssiw01:8000/TimeService?xsd=xsd0" />
+    <MetadataFile FileName="SimpleTimeService.wsdl" MetadataType="Wsdl" ID="d4c78a61-7b2a-44db-b8f4-ad921127c132" SourceId="1" SourceUrl="http://hrdtssiw01:8000/TimeService?wsdl" />
+    <MetadataFile FileName="TimeService3.xsd" MetadataType="Schema" ID="7b3b9974-b0de-4694-a750-0d3320bcc96f" SourceId="1" SourceUrl="http://hrdtssiw01:8000/TimeService?xsd=xsd3" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

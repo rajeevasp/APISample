@@ -1,0 +1,11 @@
+@using System.Web.Http
+@using API.Areas.HelpPage.Models
+@model HelpPageApiModel
+
+<div id="body">
+    <section class="content-wrapper main-content clear-fix">
+        @Html.DisplayFor(m => Model)
+    </section>
+</div>
+
+@Html.DisplayForModel("TestClientDialogs")
